@@ -37,8 +37,8 @@ function oldScrabbleScorer(word) {
 	}
 	return numberPoints;
  }
-console.log(oldScrabbleScorer('foo'))
-console.log(oldScrabbleScorer('bar'))
+// console.log(oldScrabbleScorer('foo'))
+// console.log(oldScrabbleScorer('bar'))
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
@@ -58,8 +58,8 @@ let simpleScore = function (word) {
   }
   return simpleScoreWordTotal;
 };
-console.log(simpleScore('foo') + ' points')
-console.log(simpleScore('bar') + ' points')
+// console.log(simpleScore('foo') + ' points')
+// console.log(simpleScore('bar') + ' points')
 
 
 let vowelBonusScore = function (word) {
@@ -78,8 +78,8 @@ let vowelBonusScore = function (word) {
   return vowelScoreWordTotal;
 };
 
-console.log(vowelBonusScore('foo') + ' points'); // <-- should be 7
-console.log(vowelBonusScore('bar') + ' points'); // <-- should be 5
+// console.log(vowelBonusScore('foo') + ' points'); // <-- should be 7
+// console.log(vowelBonusScore('bar') + ' points'); // <-- should be 5
 
 let scrabbleScore;
 
