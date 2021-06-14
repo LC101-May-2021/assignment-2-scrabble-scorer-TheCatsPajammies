@@ -103,7 +103,7 @@ const scoringAlgorithms = [
 
   {
     name: "Bonus Vowels",
-    description: "	Vowels are 3 pts, consonants are 1 pt.",
+    description: "Vowels are 3 pts, consonants are 1 pt.",
     scorerFunction: function (word) {
       word = word.toUpperCase();
       let vowelScoreWordTotal = 0;
