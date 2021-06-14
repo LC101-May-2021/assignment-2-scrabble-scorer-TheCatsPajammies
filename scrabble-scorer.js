@@ -69,7 +69,7 @@ let vowelBonusScore = function () {
       }
     }
   }
-  return vowelPoints;
+  return vowelScoreWordTotal;
 };
 
 let scrabbleScore;
