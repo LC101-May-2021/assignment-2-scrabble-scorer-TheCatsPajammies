@@ -187,7 +187,7 @@ let newPointStructure = transform(oldPointStructure);
 function runProgram() {
   initialPrompt();
   scorerPrompt();
-  console.log('Tests:\n');
+  //console.log('Tests:\n');
 }
 
 // Don't write any code below this line //
