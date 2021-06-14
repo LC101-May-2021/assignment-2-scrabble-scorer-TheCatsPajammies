@@ -53,7 +53,7 @@ let simpleScore = function () {
     simpleScoreWordTotal += 1;
     simplePoints += `Points for '${word[i]}': ${pointsPerLetter}\n`;
   }
-  return simplePoints;
+  return simpleScoreWordTotal;
 };
 
 let vowelBonusScore = function () {
