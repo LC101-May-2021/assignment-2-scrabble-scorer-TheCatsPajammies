@@ -37,7 +37,8 @@ function oldScrabbleScorer(word) {
 	}
 	return numberPoints;
  }
-
+console.log(oldScrabbleScorer('foo'))
+console.log(oldScrabbleScorer('bar'))
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
@@ -46,7 +47,7 @@ function initialPrompt() {
   return word;
 };
 
-let simpleScore = function () {
+let simpleScore = function (word) {
   word = word.toUpperCase();
   let simpleScoreWordTotal = 0;
   let pointsPerLetter = 1;
@@ -57,8 +58,11 @@ let simpleScore = function () {
   }
   return simpleScoreWordTotal;
 };
+console.log(simpleScore('foo') + ' points')
+console.log(simpleScore('bar') + ' points')
 
-let vowelBonusScore = function () {
+
+let vowelBonusScore = function (word) {
   word = word.toUpperCase();
   let vowelScoreWordTotal = 0;
   let consonantPoint = 1;
@@ -67,12 +71,15 @@ let vowelBonusScore = function () {
     for (const pointValue in vowelPointStructure) {
       if (vowelPointStructure[pointValue].includes(word[i])) {
         vowelPoints += `Points for '${word[i]}': ${pointValue}\n`;
-        vowelScoreWordTotal += pointValue;
+        vowelScoreWordTotal += Number(pointValue);
       }
     }
   }
   return vowelScoreWordTotal;
 };
+
+console.log(vowelBonusScore('foo') + ' points'); // <-- should be 7
+console.log(vowelBonusScore('bar') + ' points'); // <-- should be 5
 
 let scrabbleScore;
 
@@ -149,14 +156,6 @@ function scorerPrompt() {
   console.log(`Score for '${word}': ${scoringAlgorithms[scoringSystem].scorerFunction(word)}`);
 }
 
-  // if (scoringSystem === 0) {
-  //   console.log(`Score for '${word}': ${scoringAlgorithms[0].scorerFunction(word)}`);
-  // } else if (scoringSystem === 1) {
-  //   console.log(`Score for '${word}': ${scoringAlgorithms[1].scorerFunction(word)}`);
-  // } else if (scoringSystem === 0) {
-  //   console.log(`Score for '${word}': ${scoringAlgorithms[0].scorerFunction(word)}`);
-  // }
-
 let modifiedPointStructure = {};
 
 function transform() {
@@ -188,6 +187,7 @@ let newPointStructure = transform(oldPointStructure);
 function runProgram() {
   initialPrompt();
   scorerPrompt();
+  console.log('Tests:\n');
 }
 
 // Don't write any code below this line //
