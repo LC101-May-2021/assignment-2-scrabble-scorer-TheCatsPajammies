@@ -23,17 +23,19 @@ let scoringSystem = '';
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
 	let letterPoints = "";
+  let numberPoints = 0
  
 	for (let i = 0; i < word.length; i++) {
  
 	  for (const pointValue in oldPointStructure) {
  
 		 if (oldPointStructure[pointValue].includes(word[i])) {
-			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
+			letterPoints += `Points for '${word[i]}': ${pointValue}\n`;
+      numberPoints += oldPointStructure[pointValue];
 		 }
    }
 	}
-	return letterPoints;
+	return numberPoints;
  }
 
 // your job is to finish writing these functions and variables that we've named //
