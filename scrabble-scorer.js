@@ -87,8 +87,8 @@ let scrabbleScore = function(word) {
 const scoringAlgorithms = [
 
   {
-    name: "Simple Score",
-    description: "Each letter is worth 1 point.",
+    name: "Simple Score", 
+    description: "Each letter is worth 1 point.", 
     scorerFunction: function (word) {
       word = word.toUpperCase();
       let simpleScoreWordTotal = 0;
@@ -97,14 +97,14 @@ const scoringAlgorithms = [
       for (let i = 0; i < word.length; i++) {
       simpleScoreWordTotal += 1;
       simplePoints += `Points for '${word[i]}': ${pointsPerLetter}\n`;
-      }
+      } 
     return simpleScoreWordTotal;
     }
   },
 
   {
-    name: "Bonus Vowels",
-    description: "Vowels are 3 pts, consonants are 1 pt.",
+    name: "Bonus Vowels", 
+    description: "Vowels are 3 pts, consonants are 1 pt.", 
     scorerFunction(word) {
       word = word.toUpperCase();
       let vowelScoreWordTotal = 0;
@@ -117,21 +117,22 @@ const scoringAlgorithms = [
             vowelScoreWordTotal += Number(pointValue);
           }
         }
-      }
+      } 
       return vowelScoreWordTotal;
     }
   },
 
   {
-    name: "Scrabble",
-    description: "The traditional scoring algorithm.",
-    scorerFunction: function (word) {
+    name: "Scrabble", 
+    description: "The traditional scoring algorithm.", 
+    scorerFunction:
+    function (word) {
       word = word.toLowerCase();
       let scrabbleScoreTotal = 0;
       for (let i = 0; i < word.length; i++) {
       //console.log(newPointStructure[word[i]])
       scrabbleScoreTotal += newPointStructure[word[i]]
-      }
+      } 
       return scrabbleScoreTotal;
     }
   }
@@ -174,7 +175,7 @@ let newPointStructure = transform(oldPointStructure);
 function runProgram() {
   initialPrompt();
   scorerPrompt();
-  //console.log(scoringAlgorithms);
+  console.log(scoringAlgorithms);
 }
 
 // Don't write any code below this line //
@@ -192,3 +193,13 @@ module.exports = {
 	scorerPrompt: scorerPrompt
 };
 
+/*
+{ name: 'Simple Score', 
+  description: 'Each letter is worth 1 point.', 
+  scorerFunction: Function 
+}
+
+
+
+
+*/
