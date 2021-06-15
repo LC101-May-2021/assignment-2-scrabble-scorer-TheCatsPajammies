@@ -89,7 +89,7 @@ const scoringAlgorithms = [
   {
     name: "Simple Score", 
     description: "Each letter is worth 1 point.", 
-    scorerFunction: function (word) {
+    scoringFunction: function (word) {
       word = word.toUpperCase();
       let simpleScoreWordTotal = 0;
       let pointsPerLetter = 1;
@@ -105,7 +105,7 @@ const scoringAlgorithms = [
   {
     name: "Bonus Vowels", 
     description: "Vowels are 3 pts, consonants are 1 pt.", 
-    scorerFunction(word) {
+    scoringFunction(word) {
       word = word.toUpperCase();
       let vowelScoreWordTotal = 0;
       let consonantPoint = 1;
@@ -125,12 +125,10 @@ const scoringAlgorithms = [
   {
     name: "Scrabble", 
     description: "The traditional scoring algorithm.", 
-    scorerFunction:
-    function (word) {
+    scoringFunction: function (word) {
       word = word.toLowerCase();
       let scrabbleScoreTotal = 0;
       for (let i = 0; i < word.length; i++) {
-      //console.log(newPointStructure[word[i]])
       scrabbleScoreTotal += newPointStructure[word[i]]
       } 
       return scrabbleScoreTotal;
@@ -141,7 +139,7 @@ const scoringAlgorithms = [
 
 function scorerPrompt() {
   scoringSystem = input.question('Which scoring algorithm would you like to use?\n\n0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses scrabble point system\nEnter 0, 1, or 2: ');
-  console.log(`Score for '${word}': ${scoringAlgorithms[scoringSystem].scorerFunction(word)}`);
+  console.log(`Score for '${word}': ${scoringAlgorithms[scoringSystem].scoringFunction(word)}`);
 }
 
 let modifiedPointStructure = {};
@@ -194,12 +192,43 @@ module.exports = {
 };
 
 /*
-{ name: 'Simple Score', 
-  description: 'Each letter is worth 1 point.', 
-  scorerFunction: Function 
-}
+Object(
+  { 
+    name: 'Simple Score', 
+    description: 'Each letter is worth 1 point.', 
+    scorerFunction: Function 
+  }), 
+  Object(
+    { 
+      name: 'Bonus Vowels', 
+      description: 'Vowels are 3 pts, consonants are 1 pt.', 
+      scorerFunction: Function 
+    }), 
+  Object(
+    { 
+      name: 'Scrabble', 
+      description: 'The traditional scoring algorithm.', 
+      scorerFunction: Function }) 
+  ] to contain <jasmine.objectContaining(Object({ scoringFunction: Function }))>.
 
-
+Object(
+  { 
+    name: 'Simple Score', 
+    description: 'Each letter is worth 1 point.', 
+    scorerFunction: Function 
+  }), 
+Object(
+  { 
+    name: 'Bonus Vowels', 
+    description: 'Vowels are 3 pts, consonants are 1 pt.', 
+    scorerFunction: Function 
+  }), 
+  Object(
+    { name: 'Scrabble', 
+      description: 'The traditional scoring algorithm.', 
+      scorerFunction: Function 
+    }) ] t
+    o contain <jasmine.objectContaining(Object({ scoringFunction: Function }))>.
 
 
 */
