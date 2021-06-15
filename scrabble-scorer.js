@@ -37,8 +37,7 @@ function oldScrabbleScorer(word) {
 	}
 	return numberPoints;
  }
-// console.log(oldScrabbleScorer('foo'))
-// console.log(oldScrabbleScorer('bar'))
+
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
@@ -58,9 +57,6 @@ let simpleScore = function (word) {
   }
   return simpleScoreWordTotal;
 };
-// console.log(simpleScore('foo') + ' points')
-// console.log(simpleScore('bar') + ' points')
-
 
 let vowelBonusScore = function (word) {
   word = word.toUpperCase();
@@ -77,9 +73,6 @@ let vowelBonusScore = function (word) {
   }
   return vowelScoreWordTotal;
 };
-
-// console.log(vowelBonusScore('foo') + ' points'); // <-- should be 7
-// console.log(vowelBonusScore('bar') + ' points'); // <-- should be 5
 
 let scrabbleScore = function(word) {
   word = word.toLowerCase();
@@ -112,7 +105,7 @@ const scoringAlgorithms = [
   {
     name: "Bonus Vowels",
     description: "Vowels are 3 pts, consonants are 1 pt.",
-    scorerFunction: function (word) {
+    scorerFunction(word) {
       word = word.toUpperCase();
       let vowelScoreWordTotal = 0;
       let consonantPoint = 1;
@@ -140,20 +133,6 @@ const scoringAlgorithms = [
       scrabbleScoreTotal += newPointStructure[word[i]]
       }
       return scrabbleScoreTotal;
-      // word = word.toUpperCase();
-      // let letterPoints = "";
-      // let scrabbleScoreTotal = 0;
-      // for (let i = 0; i < word.length; i++) {
-    
-      //   for (const pointValue in oldPointStructure) {
-    
-      //   if (oldPointStructure[pointValue].includes(word[i])) {
-      //     letterPoints += `Points for '${word[i]}': ${pointValue}\n`;
-      //     scrabbleScoreTotal += Number(pointValue);
-      //   }
-      // }
-      // }
-      // return scrabbleScoreTotal;
     }
   }
 
@@ -195,16 +174,7 @@ let newPointStructure = transform(oldPointStructure);
 function runProgram() {
   initialPrompt();
   scorerPrompt();
-  //console.log(transform());
-  console.log(newPointStructure);
-
-  // console.log(typeof scoringAlgorithms[0].scorerFunction());
-  // console.log(typeof scoringAlgorithms[1].scorerFunction());
-  // console.log(typeof scoringAlgorithms[2].scorerFunction());
-  // console.log('Tests:\n');
-  // console.log(typeof newPointStructure);
-  // console.log(Object.keys(newPointStructure));
-  // console.log(Object.keys(oldPointStructure));
+  //console.log(scoringAlgorithms);
 }
 
 // Don't write any code below this line //
