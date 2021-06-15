@@ -9,7 +9,8 @@ const oldPointStructure = {
   4: ['F', 'H', 'V', 'W', 'Y'],
   5: ['K'],
   8: ['J', 'X'],
-  10: ['Q', 'Z']
+  10: ['Q', 'Z'],
+  // 0: [' '] <-- adds blank space = 0 bonus mission.
 };
 
 const vowelPointStructure = {
@@ -18,7 +19,7 @@ const vowelPointStructure = {
 }
 
 let word = '';
-let scoringSystem = '';
+let scoringSystem;
 
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
@@ -95,8 +96,8 @@ const scoringAlgorithms = [
       let pointsPerLetter = 1;
       let simplePoints = "";
       for (let i = 0; i < word.length; i++) {
-      simpleScoreWordTotal += 1;
-      simplePoints += `Points for '${word[i]}': ${pointsPerLetter}\n`;
+        let noPointsForSpace = (word[i] !== ' ') ? simpleScoreWordTotal += 1 : null;
+        simplePoints += `Points for '${word[i]}': ${pointsPerLetter}\n`;
       } 
     return simpleScoreWordTotal;
     }
@@ -114,7 +115,7 @@ const scoringAlgorithms = [
         for (const pointValue in vowelPointStructure) {
           if (vowelPointStructure[pointValue].includes(word[i])) {
             vowelPoints += `Points for '${word[i]}': ${pointValue}\n`;
-            vowelScoreWordTotal += Number(pointValue);
+            let noPointsForSpace = (word[i] !== ' ') ? vowelScoreWordTotal += Number(pointValue) : null;
           }
         }
       } 
@@ -139,7 +140,10 @@ const scoringAlgorithms = [
 ];
 
 function scorerPrompt() {
+  //let scoringSystem = -1;  
+  while (scoringSystem < 0 || scoringSystem > 2 || isNaN(scoringSystem)) {
   scoringSystem = input.question('Which scoring algorithm would you like to use?\n\n0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses scrabble point system\nEnter 0, 1, or 2: ');
+  }
   console.log(`Score for '${word}': ${scoringAlgorithms[scoringSystem].scoringFunction(word)}`);
 }
 
@@ -148,9 +152,8 @@ let modifiedPointStructure = {};
 function transform(oldPointStructure) {
   for (keys in oldPointStructure) {
     for (let i = 0; i < oldPointStructure[keys].length; i++) {
-      // console.log(oldPointStructure[keys][i].toLowerCase()); // Shows the individual letter values from old oldPointStructure
       if ('aelioulnrst'.split('').includes(oldPointStructure[keys][i].toLowerCase())) {
-        modifiedPointStructure[String(oldPointStructure[keys][i].toLowerCase())] = 1; // Puts the key:value pairs into the object.
+        modifiedPointStructure[String(oldPointStructure[keys][i].toLowerCase())] = 1;
       } else if ('dg'.split('').includes(oldPointStructure[keys][i].toLowerCase())) {
         modifiedPointStructure[String(oldPointStructure[keys][i].toLowerCase())] = 2;
       } else if ('bcmp'.split('').includes(oldPointStructure[keys][i].toLowerCase())) { 
@@ -163,7 +166,10 @@ function transform(oldPointStructure) {
         modifiedPointStructure[String(oldPointStructure[keys][i].toLowerCase())] = 8;
       } else if ('qz'.split('').includes(oldPointStructure[keys][i].toLowerCase())) { 
         modifiedPointStructure[String(oldPointStructure[keys][i].toLowerCase())] = 10;
-      }
+      } //else if (' '.split('').includes(oldPointStructure[keys][i].toLowerCase())) { 
+      //   modifiedPointStructure[String(oldPointStructure[keys][i].toLowerCase())] = 0;
+      // } <---This line adds the blank space = 0 Bonus mission.
+
     }
   }
   return modifiedPointStructure;
@@ -174,8 +180,7 @@ let newPointStructure = transform(oldPointStructure);
 function runProgram() {
   initialPrompt();
   scorerPrompt();
-  // console.log(scoringAlgorithms.length);
-  // console.log(scoringAlgorithms);
+  //console.log(newPointStructure);
 }
 
 // Don't write any code below this line //
@@ -193,44 +198,3 @@ module.exports = {
 	scorerPrompt: scorerPrompt
 };
 
-/*
-Object(
-  { 
-    name: 'Simple Score', 
-    description: 'Each letter is worth 1 point.', 
-    scorerFunction: Function 
-  }), 
-  Object(
-    { 
-      name: 'Bonus Vowels', 
-      description: 'Vowels are 3 pts, consonants are 1 pt.', 
-      scorerFunction: Function 
-    }), 
-  Object(
-    { 
-      name: 'Scrabble', 
-      description: 'The traditional scoring algorithm.', 
-      scorerFunction: Function }) 
-  ] to contain <jasmine.objectContaining(Object({ scoringFunction: Function }))>.
-
-Object(
-  { 
-    name: 'Simple Score', 
-    description: 'Each letter is worth 1 point.', 
-    scorerFunction: Function 
-  }), 
-Object(
-  { 
-    name: 'Bonus Vowels', 
-    description: 'Vowels are 3 pts, consonants are 1 pt.', 
-    scorerFunction: Function 
-  }), 
-  Object(
-    { name: 'Scrabble', 
-      description: 'The traditional scoring algorithm.', 
-      scorerFunction: Function 
-    }) ] t
-    o contain <jasmine.objectContaining(Object({ scoringFunction: Function }))>.
-
-
-*/
