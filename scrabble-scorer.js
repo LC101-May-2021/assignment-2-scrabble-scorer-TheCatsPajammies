@@ -81,7 +81,15 @@ let vowelBonusScore = function (word) {
 // console.log(vowelBonusScore('foo') + ' points'); // <-- should be 7
 // console.log(vowelBonusScore('bar') + ' points'); // <-- should be 5
 
-let scrabbleScore;
+let scrabbleScore = function(word) {
+  word = word.toLowerCase();
+  let scrabbleScoreTotal = 0;
+  for (let i = 0; i < word.length; i++) {
+  //console.log(newPointStructure[word[i]])
+  scrabbleScoreTotal += newPointStructure[word[i]]
+  }
+  return scrabbleScoreTotal;
+};
 
 const scoringAlgorithms = [
 
@@ -158,7 +166,7 @@ function scorerPrompt() {
 
 let modifiedPointStructure = {};
 
-function transform() {
+function transform(oldPointStructure) {
   for (keys in oldPointStructure) {
     for (let i = 0; i < oldPointStructure[keys].length; i++) {
       // console.log(oldPointStructure[keys][i].toLowerCase()); // Shows the individual letter values from old oldPointStructure
@@ -187,7 +195,16 @@ let newPointStructure = transform(oldPointStructure);
 function runProgram() {
   initialPrompt();
   scorerPrompt();
-  //console.log('Tests:\n');
+  //console.log(transform());
+  console.log(newPointStructure);
+
+  // console.log(typeof scoringAlgorithms[0].scorerFunction());
+  // console.log(typeof scoringAlgorithms[1].scorerFunction());
+  // console.log(typeof scoringAlgorithms[2].scorerFunction());
+  // console.log('Tests:\n');
+  // console.log(typeof newPointStructure);
+  // console.log(Object.keys(newPointStructure));
+  // console.log(Object.keys(oldPointStructure));
 }
 
 // Don't write any code below this line //
