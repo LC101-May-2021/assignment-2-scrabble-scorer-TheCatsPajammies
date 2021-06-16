@@ -96,9 +96,7 @@ const scoringAlgorithms = [
       word = word.toUpperCase();
       let simpleScoreWordTotal = 0;
       let pointsPerLetter = 1;
-      //let simplePoints = "";
       for (let i = 0; i < word.length; i++) {
-        //simplePoints += `Points for '${word[i]}': ${pointsPerLetter}\n`;
         let noPointsForSpace = (word[i] !== ' ') ? simpleScoreWordTotal += 1 : null;
       } 
     return simpleScoreWordTotal;
@@ -111,12 +109,9 @@ const scoringAlgorithms = [
     scoringFunction: vowelBonusScore = function(word) {
       word = word.toUpperCase();
       let vowelScoreWordTotal = 0;
-      let consonantPoint = 1;
-      //let vowelPoints = "";
       for (let i = 0; i < word.length; i++) {
         for (const pointValue in vowelPointStructure) {
           if (vowelPointStructure[pointValue].includes(word[i])) {
-            //vowelPoints += `Points for '${word[i]}': ${pointValue}\n`;
             let noPointsForSpace = (word[i] !== ' ') ? vowelScoreWordTotal += Number(pointValue) : null;
           }
         }
@@ -181,7 +176,6 @@ let newPointStructure = transform(oldPointStructure);
 function runProgram() {
   initialPrompt();
   scorerPrompt();
-  //console.log(newPointStructure);
 }
 
 // Don't write any code below this line //
