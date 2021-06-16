@@ -15,7 +15,10 @@ const oldPointStructure = {
 
 const vowelPointStructure = {
   3: ['A', 'E', 'I', 'O', 'U'],
-  1: ['L', 'N', 'R', 'S', 'T', 'D', 'G', 'B', 'C', 'M', 'P', 'F', 'H', 'V', 'W', 'Y', 'K', 'J', 'X', 'Q', 'Z']
+  1: ['L', 'N', 'R', 'S', 'T', 'D', 
+      'G', 'B', 'C', 'M', 'P', 'F', 
+      'H', 'V', 'W', 'Y', 'K', 'J', 
+      'X', 'Q', 'Z']
 }
 
 let word = '';
@@ -79,7 +82,6 @@ let scrabbleScore = function(word) {
   word = word.toLowerCase();
   let scrabbleScoreTotal = 0;
   for (let i = 0; i < word.length; i++) {
-  //console.log(newPointStructure[word[i]])
   scrabbleScoreTotal += newPointStructure[word[i]]
   }
   return scrabbleScoreTotal;
@@ -94,10 +96,10 @@ const scoringAlgorithms = [
       word = word.toUpperCase();
       let simpleScoreWordTotal = 0;
       let pointsPerLetter = 1;
-      let simplePoints = "";
+      //let simplePoints = "";
       for (let i = 0; i < word.length; i++) {
+        //simplePoints += `Points for '${word[i]}': ${pointsPerLetter}\n`;
         let noPointsForSpace = (word[i] !== ' ') ? simpleScoreWordTotal += 1 : null;
-        simplePoints += `Points for '${word[i]}': ${pointsPerLetter}\n`;
       } 
     return simpleScoreWordTotal;
     }
@@ -110,11 +112,11 @@ const scoringAlgorithms = [
       word = word.toUpperCase();
       let vowelScoreWordTotal = 0;
       let consonantPoint = 1;
-      let vowelPoints = "";
+      //let vowelPoints = "";
       for (let i = 0; i < word.length; i++) {
         for (const pointValue in vowelPointStructure) {
           if (vowelPointStructure[pointValue].includes(word[i])) {
-            vowelPoints += `Points for '${word[i]}': ${pointValue}\n`;
+            //vowelPoints += `Points for '${word[i]}': ${pointValue}\n`;
             let noPointsForSpace = (word[i] !== ' ') ? vowelScoreWordTotal += Number(pointValue) : null;
           }
         }
@@ -140,9 +142,8 @@ const scoringAlgorithms = [
 ];
 
 function scorerPrompt() {
-  //let scoringSystem = -1;  
   while (scoringSystem < 0 || scoringSystem > 2 || isNaN(scoringSystem)) {
-  scoringSystem = input.question('Which scoring algorithm would you like to use?\n\n0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses scrabble point system\nEnter 0, 1, or 2: ');
+    scoringSystem = input.question('Which scoring algorithm would you like to use?\n\n0 - Simple: One point per character\n1 - Vowel Bonus: Vowels are worth 3 points\n2 - Scrabble: Uses scrabble point system\nEnter 0, 1, or 2: ');
   }
   console.log(`Score for '${word}': ${scoringAlgorithms[scoringSystem].scoringFunction(word)}`);
 }
@@ -168,7 +169,7 @@ function transform(oldPointStructure) {
         modifiedPointStructure[String(oldPointStructure[keys][i].toLowerCase())] = 10;
       } //else if (' '.split('').includes(oldPointStructure[keys][i].toLowerCase())) { 
       //   modifiedPointStructure[String(oldPointStructure[keys][i].toLowerCase())] = 0;
-      // } <---This line adds the blank space = 0 Bonus mission.
+      // } <---These lines add the blank space = 0 Bonus mission.
 
     }
   }
