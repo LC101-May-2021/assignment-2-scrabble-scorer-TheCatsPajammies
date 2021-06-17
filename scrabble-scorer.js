@@ -109,12 +109,9 @@ const scoringAlgorithms = [
     scoringFunction: vowelBonusScore = function(word) {
       word = word.toUpperCase();
       let vowelScoreWordTotal = 0;
+      let vowels = 'AEIOU'.split('');
       for (let i = 0; i < word.length; i++) {
-        for (const pointValue in vowelPointStructure) {
-          if (vowelPointStructure[pointValue].includes(word[i])) {
-            let noPointsForSpace = (word[i] !== ' ') ? vowelScoreWordTotal += Number(pointValue) : null;
-          }
-        }
+        let vowelScorer = (vowels.includes(word[i])) ? vowelScoreWordTotal += 3: vowelScoreWordTotal += 1;
       } 
       return vowelScoreWordTotal;
     }
@@ -172,6 +169,8 @@ function transform(oldPointStructure) {
 }
 
 let newPointStructure = transform(oldPointStructure);
+
+
 
 function runProgram() {
   initialPrompt();
