@@ -13,34 +13,21 @@ const oldPointStructure = {
   // 0: [' '] <-- adds blank space = 0 bonus mission.
 };
 
-const vowelPointStructure = {
-  3: ['A', 'E', 'I', 'O', 'U'],
-  1: ['L', 'N', 'R', 'S', 'T', 'D', 
-      'G', 'B', 'C', 'M', 'P', 'F', 
-      'H', 'V', 'W', 'Y', 'K', 'J', 
-      'X', 'Q', 'Z']
-}
-
 let word = '';
 let scoringSystem;
 
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
-	let letterPoints = "";
-  let numberPoints = 0
- 
+  let numberPoints = 0 
 	for (let i = 0; i < word.length; i++) {
- 
-	  for (const pointValue in oldPointStructure) {
- 
-		 if (oldPointStructure[pointValue].includes(word[i])) {
-			letterPoints += `Points for '${word[i]}': ${pointValue}\n`;
-      numberPoints += Number(pointValue);
-		 }
-   }
+ 	  for (const pointValue in oldPointStructure) {
+ 		  if (oldPointStructure[pointValue].includes(word[i])) {
+        numberPoints += Number(pointValue);
+		  }
+    }
 	}
 	return numberPoints;
- }
+}
 
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
@@ -54,10 +41,8 @@ let simpleScore = function (word) {
   word = word.toUpperCase();
   let simpleScoreWordTotal = 0;
   let pointsPerLetter = 1;
-  let simplePoints = "";
   for (let i = 0; i < word.length; i++) {
     simpleScoreWordTotal += 1;
-    simplePoints += `Points for '${word[i]}': ${pointsPerLetter}\n`;
   }
   return simpleScoreWordTotal;
 };
@@ -65,20 +50,14 @@ let simpleScore = function (word) {
 let vowelBonusScore = function (word) {
   word = word.toUpperCase();
   let vowelScoreWordTotal = 0;
-  let consonantPoint = 1;
-  let vowelPoints = "";
+  let vowels = 'AEIOU'.split('');
   for (let i = 0; i < word.length; i++) {
-    for (const pointValue in vowelPointStructure) {
-      if (vowelPointStructure[pointValue].includes(word[i])) {
-        vowelPoints += `Points for '${word[i]}': ${pointValue}\n`;
-        vowelScoreWordTotal += Number(pointValue);
-      }
-    }
-  }
+    let vowelScorer = (vowels.includes(word[i])) ? vowelScoreWordTotal += 3: vowelScoreWordTotal += 1;
+  } 
   return vowelScoreWordTotal;
 };
 
-let scrabbleScore = function(word) {
+let scrabbleScore = function (word) {
   word = word.toLowerCase();
   let scrabbleScoreTotal = 0;
   for (let i = 0; i < word.length; i++) {
@@ -92,44 +71,20 @@ const scoringAlgorithms = [
   {
     name: "Simple Score", 
     description: "Each letter is worth 1 point.", 
-    scoringFunction: simpleScore = function (word) {
-      word = word.toUpperCase();
-      let simpleScoreWordTotal = 0;
-      let pointsPerLetter = 1;
-      for (let i = 0; i < word.length; i++) {
-        let noPointsForSpace = (word[i] !== ' ') ? simpleScoreWordTotal += 1 : null;
-      } 
-    return simpleScoreWordTotal;
-    }
+    scoringFunction: simpleScore
   },
 
   {
     name: "Bonus Vowels", 
     description: "Vowels are 3 pts, consonants are 1 pt.", 
-    scoringFunction: vowelBonusScore = function(word) {
-      word = word.toUpperCase();
-      let vowelScoreWordTotal = 0;
-      let vowels = 'AEIOU'.split('');
-      for (let i = 0; i < word.length; i++) {
-        let vowelScorer = (vowels.includes(word[i])) ? vowelScoreWordTotal += 3: vowelScoreWordTotal += 1;
-      } 
-      return vowelScoreWordTotal;
-    }
+    scoringFunction: vowelBonusScore
   },
 
   {
     name: "Scrabble", 
-    description: "The traditional scoring algorithm.", 
-    scoringFunction: scrabbleScore = function(word) {
-      word = word.toLowerCase();
-      let scrabbleScoreTotal = 0;
-      for (let i = 0; i < word.length; i++) {
-      scrabbleScoreTotal += newPointStructure[word[i]]
-      } 
-      return scrabbleScoreTotal;
-    }
+    description: "The traditional scoring algorithm.",
+    scoringFunction: scrabbleScore
   }
-
 
 ];
 
